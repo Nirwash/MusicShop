@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Music Shop</string>
+    <string name="sale">Sale 30%</string>
+    <string name="select">Select Item</string>
+    <string name="addToCard">ADD TO CARD</string>
+    <string name="hint">Your name</string>
+    <string name="orderPrice">Order Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="currentPrice">0$</string>
+    <string name="count">0</string>
+</resources>

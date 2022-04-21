@@ -6,6 +6,7 @@
     <string name="hint">Your name</string>
     <string name="orderPrice">Order Price</string>
     <string name="quantity">Quantity</string>
-    <string name="currentPrice">0$</string>
+    <string name="currentPrice">0</string>
+    <string name="dollar">$</string>
     <string name="count">0</string>
 </resources>

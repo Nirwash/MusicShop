@@ -1,4 +1,4 @@
-package com.example.musicshop
+package com.example.musicshop.data
 
 data class Order(
     val customerName: String,

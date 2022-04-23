@@ -1,26 +1,29 @@
 package com.example.musicshop
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
+import com.example.musicshop.data.Order
+import com.example.musicshop.data.SharedViewModel
 import com.example.musicshop.databinding.FragmentMainBinding
 
 const val TAG = "MainFragmentTag"
 class MainFragment: BaseFragment() {
     private var _binding: FragmentMainBinding? = null
     private val b get() = _binding!!
+
     var quantity = 0
     val items = arrayOf("Guitar", "Keyboard", "Ukulele", "Drums")
     val goodsMap = mapOf("Guitar" to 750, "Keyboard" to 1000, "Ukulele" to 500, "Drums" to 1500)
     lateinit var goodsName: String
     var price = 0
     var image = R.drawable.guitar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,7 @@ class MainFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val model = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         b.bPlus.setOnClickListener {
             b.tvCount.text = increaseQuantity().toString()
@@ -48,7 +52,13 @@ class MainFragment: BaseFragment() {
         b.bMinus.setOnClickListener {
             b.tvCount.text = decreaseQuantity().toString()
         }
-        b.bAddToCard.setOnClickListener { addToCart() }
+        b.bAddToCard.setOnClickListener {
+            val name = b.edText.text.toString()
+            val order = Order(name, goodsName, quantity, (price*quantity))
+            model.setData(order)
+            val fragment = OrderFragment()
+            fm.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
+        }
 
         createSpinner()
     }
@@ -109,12 +119,4 @@ class MainFragment: BaseFragment() {
         b.imgItem.setImageResource(image)
     }
 
-    private fun addToCart() {
-        val name = b.edText.text.toString()
-        val order = Order(name, goodsName, quantity, (price*quantity))
-        Log.d(TAG, order.toString())
-        val fragment = OrderFragment()
-        fm.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
-
-    }
 }

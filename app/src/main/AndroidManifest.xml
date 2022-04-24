@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.musicshop">
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <data android:scheme="mailto"/>
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
